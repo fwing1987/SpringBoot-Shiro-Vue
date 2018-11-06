@@ -7,23 +7,8 @@
 
 # 二、WEB的典型用户验证流程
 
-```sequence
-Title:web权限验证简图
-participant Cookie
-participant 浏览器
-participant 服务端
-participant SessionManager
-note over 浏览器:登录
-浏览器->>服务端:用户名/密码
-服务端->>SessionManager:登录成功，保存session
-服务端->>浏览器:返回sessionId
-浏览器->>Cookie:保存sessionId
-note over 浏览器:取用户信息
-Cookie->>浏览器:取sessionId
-浏览器->>服务端:sessionId
-SessionManager->>服务端:取session
-服务端->>浏览器:验证并返回用户信息
-```
+![](https://github.com/fwing1987/SpringBoot-Shiro-Vue/blob/master/flow.jpg?raw=true)  
+
 &#160; &#160; &#160; &#160;特意将Cookie与SessionManager单独出来，是因为这两个是可选的，可配的：
 * Cookie可以选择不使用，只将sessionId存放在页面的内存中，这时页面被关闭，sessionId也就丢失了，当然，服务端还存在一个类似野指针的session；也可以选择使用localStorage；
 * SessionManager，Shiro提供一个默认的DefaultWebSessionManager，是使用MemorySessionDAO在服务端的内存中保存session，但存在几个问题，不推荐在生产环境中使用：
