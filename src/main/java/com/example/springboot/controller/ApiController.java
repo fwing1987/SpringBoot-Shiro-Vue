@@ -66,7 +66,13 @@ public class ApiController {
 
             } while (false);
         }catch (InvocationTargetException e) {
-            if(e.getTargetException() instanceof  RuntimeException){
+            if(e.getTargetException() instanceof LockedAccountException){
+                result.message = "用户被冻结~";
+            }else if(e.getTargetException() instanceof UnauthenticatedException){
+                result.message = "需要登录~";
+            }else if(e.getTargetException() instanceof UnauthorizedException){
+                result.message = "权限不足~";
+            }else if(e.getTargetException() instanceof  RuntimeException){
                 if(e.getTargetException().getMessage() == null){
                     log.error("调用接口错误：",e.getTargetException());
                 }else{
@@ -75,13 +81,6 @@ public class ApiController {
             }else {
                 log.error("调用接口错误：", e.getTargetException());
             }
-            result.message = e.getTargetException().getMessage();
-        }catch(LockedAccountException e){
-            result.message = "用户被冻结~";
-        }catch(UnauthenticatedException e){
-            result.message = "需要登录~";
-        }catch(UnauthorizedException e){
-            result.message = "权限不足~";
         }catch (Exception e) {
             log.error("调用接口错误：", e);
             result.message = e.getMessage();
