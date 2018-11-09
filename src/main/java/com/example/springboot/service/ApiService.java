@@ -55,9 +55,9 @@ public class ApiService {
     @RequiresAuthentication
     public Result getUserInfo(JSONObject json){
         Subject subject = SecurityUtils.getSubject();
-        SysUserEntity user = (SysUserEntity)subject.getPrincipal();
+//        SysUserEntity user = (SysUserEntity)subject.getPrincipal();
 
-        JSONObject retJson = (JSONObject)JSON.toJSON(user);
+        JSONObject retJson = (JSONObject)JSON.toJSON(subject.getPrincipal());
         retJson.remove("password");
         retJson.remove("id");
         retJson.remove("salt");

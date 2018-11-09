@@ -1,6 +1,7 @@
 package com.example.springboot.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "sys_user", schema = "test", catalog = "")
-public class SysUserEntity {
+public class SysUserEntity implements Serializable {
     public interface STATE {
         int NORMAL = 1;
         int INVALID = 2;
