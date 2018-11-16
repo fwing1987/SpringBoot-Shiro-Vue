@@ -67,6 +67,7 @@ public class ApiService {
         return result;
     }
 
+    @RequiresAuthentication
     public Result logout(JSONObject json){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
