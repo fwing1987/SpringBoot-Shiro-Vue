@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.gentry.DnChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.example.springboot.gentry.DnChannel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="root_id" property="rootId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="platform_fee" property="platformFee" jdbcType="INTEGER" />
+    <result column="acc_type" property="accType" jdbcType="TINYINT" />
+    <result column="ctype" property="ctype" jdbcType="TINYINT" />
+    <result column="is_red_pack" property="isRedPack" jdbcType="CHAR" />
+    <result column="pay_method" property="payMethod" jdbcType="CHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="upd_time" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="taobao" property="taobao" jdbcType="VARCHAR" />
+    <result column="wx_id" property="wxId" jdbcType="INTEGER" />
+    <result column="pids" property="pids" jdbcType="VARCHAR" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dn_channel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.springboot.gentry.DnChannel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dn_channel (root_id, pid, `name`, 
+      `level`, channel_code, username, 
+      token, phone, `password`, 
+      province, city, country, 
+      platform_fee, acc_type, ctype, 
+      is_red_pack, pay_method, `state`, 
+      upd_time, create_time, taobao, 
+      wx_id, pids, is_top)
+    values (#{rootId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=TINYINT}, #{channelCode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{platformFee,jdbcType=INTEGER}, #{accType,jdbcType=TINYINT}, #{ctype,jdbcType=TINYINT}, 
+      #{isRedPack,jdbcType=CHAR}, #{payMethod,jdbcType=CHAR}, #{state,jdbcType=TINYINT}, 
+      #{updTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{taobao,jdbcType=VARCHAR}, 
+      #{wxId,jdbcType=INTEGER}, #{pids,jdbcType=VARCHAR}, #{isTop,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.springboot.gentry.DnChannel" >
+    update dn_channel
+    set root_id = #{rootId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=TINYINT},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      platform_fee = #{platformFee,jdbcType=INTEGER},
+      acc_type = #{accType,jdbcType=TINYINT},
+      ctype = #{ctype,jdbcType=TINYINT},
+      is_red_pack = #{isRedPack,jdbcType=CHAR},
+      pay_method = #{payMethod,jdbcType=CHAR},
+      `state` = #{state,jdbcType=TINYINT},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      taobao = #{taobao,jdbcType=VARCHAR},
+      wx_id = #{wxId,jdbcType=INTEGER},
+      pids = #{pids,jdbcType=VARCHAR},
+      is_top = #{isTop,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, root_id, pid, `name`, `level`, channel_code, username, token, phone, `password`, 
+    province, city, country, platform_fee, acc_type, ctype, is_red_pack, pay_method, 
+    `state`, upd_time, create_time, taobao, wx_id, pids, is_top
+    from dn_channel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, root_id, pid, `name`, `level`, channel_code, username, token, phone, `password`, 
+    province, city, country, platform_fee, acc_type, ctype, is_red_pack, pay_method, 
+    `state`, upd_time, create_time, taobao, wx_id, pids, is_top
+    from dn_channel
+  </select>
+</mapper>

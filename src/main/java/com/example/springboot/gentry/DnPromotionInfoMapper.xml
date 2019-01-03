@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.gentry.DnPromotionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.springboot.gentry.DnPromotionInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="channel_Id" property="channelId" jdbcType="INTEGER" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="yyb_imei1" property="yybImei1" jdbcType="VARCHAR" />
+    <result column="yyb_imei2" property="yybImei2" jdbcType="VARCHAR" />
+    <result column="imei1" property="imei1" jdbcType="VARCHAR" />
+    <result column="imei2" property="imei2" jdbcType="VARCHAR" />
+    <result column="imsi" property="imsi" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="wifi_id" property="wifiId" jdbcType="VARCHAR" />
+    <result column="hardware" property="hardware" jdbcType="VARCHAR" />
+    <result column="android_id" property="androidId" jdbcType="VARCHAR" />
+    <result column="android_api" property="androidApi" jdbcType="VARCHAR" />
+    <result column="oldImei" property="oldimei" jdbcType="VARCHAR" />
+    <result column="income" property="income" jdbcType="INTEGER" />
+    <result column="discntedIncome" property="discntedincome" jdbcType="INTEGER" />
+    <result column="income_est" property="incomeEst" jdbcType="INTEGER" />
+    <result column="income_act" property="incomeAct" jdbcType="INTEGER" />
+    <result column="income_estmgr" property="incomeEstmgr" jdbcType="INTEGER" />
+    <result column="income_mgr" property="incomeMgr" jdbcType="INTEGER" />
+    <result column="quality" property="quality" jdbcType="INTEGER" />
+    <result column="sceneId" property="sceneid" jdbcType="TINYINT" />
+    <result column="flag" property="flag" jdbcType="TINYINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="isBadImei" property="isbadimei" jdbcType="TINYINT" />
+    <result column="noIncome" property="noincome" jdbcType="INTEGER" />
+    <result column="bstate" property="bstate" jdbcType="INTEGER" />
+    <result column="upd_time" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dn_promotion_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.springboot.gentry.DnPromotionInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dn_promotion_info (channel_Id, channel_code, yyb_imei1, 
+      yyb_imei2, imei1, imei2, 
+      imsi, model, company, 
+      brand, mac, wifi_id, 
+      hardware, android_id, android_api, 
+      oldImei, income, discntedIncome, 
+      income_est, income_act, income_estmgr, 
+      income_mgr, quality, sceneId, 
+      flag, `state`, isBadImei, 
+      noIncome, bstate, upd_time, 
+      create_time)
+    values (#{channelId,jdbcType=INTEGER}, #{channelCode,jdbcType=VARCHAR}, #{yybImei1,jdbcType=VARCHAR}, 
+      #{yybImei2,jdbcType=VARCHAR}, #{imei1,jdbcType=VARCHAR}, #{imei2,jdbcType=VARCHAR}, 
+      #{imsi,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{wifiId,jdbcType=VARCHAR}, 
+      #{hardware,jdbcType=VARCHAR}, #{androidId,jdbcType=VARCHAR}, #{androidApi,jdbcType=VARCHAR}, 
+      #{oldimei,jdbcType=VARCHAR}, #{income,jdbcType=INTEGER}, #{discntedincome,jdbcType=INTEGER}, 
+      #{incomeEst,jdbcType=INTEGER}, #{incomeAct,jdbcType=INTEGER}, #{incomeEstmgr,jdbcType=INTEGER}, 
+      #{incomeMgr,jdbcType=INTEGER}, #{quality,jdbcType=INTEGER}, #{sceneid,jdbcType=TINYINT}, 
+      #{flag,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{isbadimei,jdbcType=TINYINT}, 
+      #{noincome,jdbcType=INTEGER}, #{bstate,jdbcType=INTEGER}, #{updTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.springboot.gentry.DnPromotionInfo" >
+    update dn_promotion_info
+    set channel_Id = #{channelId,jdbcType=INTEGER},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      yyb_imei1 = #{yybImei1,jdbcType=VARCHAR},
+      yyb_imei2 = #{yybImei2,jdbcType=VARCHAR},
+      imei1 = #{imei1,jdbcType=VARCHAR},
+      imei2 = #{imei2,jdbcType=VARCHAR},
+      imsi = #{imsi,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      wifi_id = #{wifiId,jdbcType=VARCHAR},
+      hardware = #{hardware,jdbcType=VARCHAR},
+      android_id = #{androidId,jdbcType=VARCHAR},
+      android_api = #{androidApi,jdbcType=VARCHAR},
+      oldImei = #{oldimei,jdbcType=VARCHAR},
+      income = #{income,jdbcType=INTEGER},
+      discntedIncome = #{discntedincome,jdbcType=INTEGER},
+      income_est = #{incomeEst,jdbcType=INTEGER},
+      income_act = #{incomeAct,jdbcType=INTEGER},
+      income_estmgr = #{incomeEstmgr,jdbcType=INTEGER},
+      income_mgr = #{incomeMgr,jdbcType=INTEGER},
+      quality = #{quality,jdbcType=INTEGER},
+      sceneId = #{sceneid,jdbcType=TINYINT},
+      flag = #{flag,jdbcType=TINYINT},
+      `state` = #{state,jdbcType=TINYINT},
+      isBadImei = #{isbadimei,jdbcType=TINYINT},
+      noIncome = #{noincome,jdbcType=INTEGER},
+      bstate = #{bstate,jdbcType=INTEGER},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, channel_Id, channel_code, yyb_imei1, yyb_imei2, imei1, imei2, imsi, model, 
+    company, brand, mac, wifi_id, hardware, android_id, android_api, oldImei, income, 
+    discntedIncome, income_est, income_act, income_estmgr, income_mgr, quality, sceneId, 
+    flag, `state`, isBadImei, noIncome, bstate, upd_time, create_time
+    from dn_promotion_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, channel_Id, channel_code, yyb_imei1, yyb_imei2, imei1, imei2, imsi, model, 
+    company, brand, mac, wifi_id, hardware, android_id, android_api, oldImei, income, 
+    discntedIncome, income_est, income_act, income_estmgr, income_mgr, quality, sceneId, 
+    flag, `state`, isBadImei, noIncome, bstate, upd_time, create_time
+    from dn_promotion_info
+  </select>
+</mapper>
