@@ -94,4 +94,43 @@
     `state`, upd_time, create_time, taobao, wx_id, pids, is_top
     from dn_channel
   </select>
+  <select id="getSummary" resultType="map">
+    select 'yesterday' day,count(1) cnt,
+           sum((case when a.bstate=0 and a.state=3 then income_act
+                     when a.bstate=0 and a.state!=3 then income_est
+                     when a.bstate=1 and b.id=#{channelId} then income_est-income_estmgr
+                     when a.bstate=1 and b.id!=#{channelId} then ade.amount end))/100 income
+    from dn_channel b ,dn_promotion_info a left join dn_channel_account_detail ad
+                               on ad.target_id=a.id and ad.channel_id=#{channelId}
+                                           left join dn_channel_account_detail_est ade
+                               on ade.target_id=a.id and ade.channel_id=#{channelId}
+    where find_in_set(#{channelId},b.pids)  and a.channel_id=b.id and a.state=2
+    and a.create_time &gt; date_format(date_sub(now(),interval 1 day),'%Y-%m-%d')
+    and a.create_time &lt; date_format(now(),'%Y-%m-%d')
+  </select>
+  <select id="getUserPromotionByPage" resultType="map">
+    select yyb_imei1 imei,a.noIncome,a.create_time,b.name,b.phone,
+    (case when a.bstate=0 and a.state=3 then income_act
+    when a.bstate=0 and a.state!=3 then income_est
+    when a.bstate=1 then income_est-income_estmgr
+    when a.bstate=2 then income_act-income_mgr end )/100 income,
+    if(a.state=3 and 2=0 or 2!=0 and a.bstate=2,1,0) final,a.quality discount
+    from dn_channel b ,dn_promotion_info a left join dn_channel_account_detail ad
+    on ad.target_id=a.id and ad.channel_id=#{channelId}
+    left join dn_channel_account_detail_est ade
+    on ade.target_id=a.id and ade.channel_id=#{channelId}
+    where find_in_set(#{channelId},b.pids) and a.channel_id=b.id
+    <choose>
+      <when test="startTime==null and endTime!=null">
+        and a.create_time like #{endTime}
+      </when>
+      <when test="startTime!=null and endTime==null">
+        and a.create_time like #{startTime}
+      </when>
+      <when test="startTime!=null and endTime!=null">
+        and a.create_time &gt;=#{startTime} and a.create_time &lt;=#{endTime}
+      </when>
+    </choose>
+    order by a.id desc
+  </select>
 </mapper>
